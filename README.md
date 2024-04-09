@@ -8,7 +8,7 @@ This project involves updating and adding new features to an existing web applic
 
 ### Updating assignment 02’s files:
 
-- [ ] Switch all MySQL statements to prepared statements.
+- [x] Switch all MySQL statements to prepared statements.
 - [ ] Update index.php page:
   - [ ] Check if the user is logged in.
   - [ ] Display the last 10 posts if the user is logged in.
