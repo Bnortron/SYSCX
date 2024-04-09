@@ -34,9 +34,11 @@ if (isset($_SESSION['student_id'])) {
          $avatar = NULL;
       }
 
-      // Get last 5 posts from all users
-      $sql = "SELECT * FROM users_posts ORDER BY post_ID DESC LIMIT 5";
-      $result = $conn->query($sql);
+      // Get last 10 posts from all users
+      $sql = "SELECT * FROM users_posts ORDER BY post_ID DESC LIMIT 10";
+      $statement = $conn->prepare($sql);
+      $statement->execute();
+      $result = $statement->get_result();
 
       // Put posts & post timestamps in arrays
       $posts = array();
@@ -53,6 +55,8 @@ if (isset($_SESSION['student_id'])) {
 
 } else {
    echo "Invalid Student ID";
+   // Redirect user to login.php (coming soon)
+   header("Location: register.php");
 }
 ?>
 
