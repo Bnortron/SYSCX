@@ -8,7 +8,6 @@ session_start();
 // Check if student id is set
 if (isset($_SESSION['student_id'])) {
 	$student_id = $_SESSION['student_id'];
-
 	// Try connection
 	try {
 		// Connect to database

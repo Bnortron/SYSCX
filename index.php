@@ -13,7 +13,6 @@ if (isset($_SESSION['student_id'])) {
    try {
       // Connect to database
       $conn = new mysqli($server_name, $username, $password, $database_name);
-      // echo "Connected Successfully <br>";
 
       // Get user_info data
       $user_info = getUserInfo($conn, $student_id);
@@ -35,10 +34,12 @@ if (isset($_SESSION['student_id'])) {
       }
 
       // Get last 10 posts from all users
-      $sql = "SELECT * FROM users_posts ORDER BY post_ID DESC LIMIT 10";
-      $statement = $conn->prepare($sql);
-      $statement->execute();
-      $result = $statement->get_result();
+      // $sql = "SELECT * FROM users_posts WHERE student_id = ? ORDER BY post_ID DESC LIMIT 10";
+      // $statement = $conn->prepare($sql);
+      // $statement->bind_param('i', $student_id);
+      // $statement->execute();
+      // $result = $statement->get_result();
+      $result = getUserPosts($conn, $student_id);
 
       // Put posts & post timestamps in arrays
       $posts = array();
@@ -54,9 +55,8 @@ if (isset($_SESSION['student_id'])) {
    }
 
 } else {
-   echo "Invalid Student ID";
-   // Redirect user to login.php (coming soon)
-   header("Location: register.php");
+   // Redirect user to login.php
+   header("Location: login.php");
 }
 ?>
 
@@ -82,8 +82,8 @@ if (isset($_SESSION['student_id'])) {
          <ul>
             <li class="active"><a href="index.php">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="register.php">Register</a></li>
-            <li><a href="">Log out</a></li>
+            <!-- <li><a href="register.php">Register</a></li> -->
+            <li><a href="logout.php">Log out</a></li>
          </ul>
       </nav>
 
