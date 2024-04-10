@@ -23,8 +23,8 @@ This project involves updating and adding new features to an existing web applic
   - [x] Prompt the user to log in if they don't have an account.
 - [x] Update user info section:
   - [x] Display user information based on login status.
-- [ ] Update navigation menu:
-  - [ ] Display appropriate links based on login status and user type.
+- [x] Update navigation menu:
+  - [x] Display appropriate links based on login status and user type.
 
 ### Adding new features:
 
@@ -34,11 +34,11 @@ This project involves updating and adding new features to an existing web applic
   - [x] Implement login functionality with email and password authentication.
   - [x] Redirect the user to index.php upon successful login.
   - [x] Prompt the user to register if they don't have an account.
-- [ ] Create logout.php page:
-  - [ ] Implement logout functionality to destroy the session.
-  - [ ] Redirect the user to login.php after logout.
-- [ ] Create users_permissions table:
-  - [ ] Create a table with columns student_id (primary key) and account_type.
+- [x] Create logout.php page:
+  - [x] Implement logout functionality to destroy the session.
+  - [x] Redirect the user to login.php after logout.
+- [x] Create users_permissions table:
+  - [x] Create a table with columns student_id (primary key) and account_type.
 - [ ] Create user_list.php page:
   - [ ] Display a list of users and their information.
   - [ ] Accessible only by users with admin permissions.
