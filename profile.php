@@ -1,14 +1,13 @@
 <?php
 // Include connection to db and db functions
-require_once 'phpScripts/connection.php';
-require_once 'phpScripts/db_functions.php';
+include 'phpScripts/connection.php';
+include 'phpScripts/db_functions.php';
 
 // Check session
 session_start();
 
 if (isset($_SESSION['student_id'])) {
    $student_id = $_SESSION['student_id'];
-
    // Try connection
    try {
       // Connect to database
@@ -30,31 +29,14 @@ if (isset($_SESSION['student_id'])) {
          extract($users_avatar);
          extract($users_address);
       }
-      // If user has not registered through register.php page, then set all php variables to NULL/empty
-      // Prevents undefined variable error(s) (crashes page if user navigates from register.php without registering)
-      else {
-         $first_name = '';
-         $last_name = '';
-         $dob = '';
-
-         $street_number = NULL;
-         $street_name = '';
-         $city = '';
-         $province = '';
-         $postal_code = '';
-
-         $student_email = '';
-         $program = '';
-         $avatar = NULL;
-      }
-
    } catch (mysqli_sql_exception $e) {
       $error = $e->getMessage();
       echo $error;
    }
 
 } else {
-   echo "Invalid Student ID";
+   // Redirect user to login.php
+   header("Location: login.php");
 }
 ?>
 
@@ -78,8 +60,8 @@ if (isset($_SESSION['student_id'])) {
          <ul>
             <li><a href="index.php">Home</a></li>
             <li class="active"><a href="profile.php">Profile</a></li>
-            <li><a href="register.php">Register</a></li>
-            <li><a href="">Log out</a></li>
+            <!-- <li><a href="register.php">Register</a></li> -->
+            <li><a href="logout.php">Log out</a></li>
          </ul>
       </nav>
 

@@ -2,13 +2,26 @@
 // Include server information
 include ("connection.php");
 
+session_start();
+
 // Try connection
 try {
 	// Connect to database
 	$conn = new mysqli($server_name, $username, $password, $database_name);
-	// echo "Connected Successfully <br>";
 
 	// Form information
+	// Password Information:
+	//  - password
+	// - confirm_password
+	$password = $_POST['password'];
+	$confirm_password = $_POST['confirm_password'];
+
+	// Check if passwords match
+	if ($password != $confirm_password) {
+		echo "Passwords must match";
+		exit();
+	}
+
 	// Personal Information:
 	// - first_name
 	// - last_name
@@ -23,6 +36,18 @@ try {
 	$student_email = $_POST['student_email'];
 	$program = $_POST['program'];
 
+	// Check if student email already taken
+	$sql = "SELECT * FROM users_info WHERE student_email = ?";
+	$statement = $conn->prepare($sql);
+	$statement->bind_param('s', $student_email);
+	$statement->execute();
+	$result = $statement->get_result();
+
+	if ($result->num_rows > 0) {
+		echo "Email is already taken please try another.";
+		exit();
+	}
+
 	// Update users_info
 	$sql = "INSERT INTO users_info (student_email, first_name, last_name, dob) VALUES (?,?,?,?)";
 	$statement = $conn->prepare($sql);
@@ -32,10 +57,6 @@ try {
 
 	// Auto-generated student_id
 	$student_id = $conn->insert_id;
-
-	// Store student_id in super global
-	session_start();
-	$_SESSION['student_id'] = $student_id;
 
 	// Update users_program
 	$sql = "INSERT INTO users_program (student_id, program) VALUES (?,?)";
@@ -70,6 +91,26 @@ try {
 	$statement->bind_param('iissss', $student_id, $street_number, $street_name, $city, $province, $postal_code);
 	$statement->execute();
 
+	// Hash password
+	$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+	// Update users_passwords
+	$sql = "INSERT INTO users_passwords (student_id, password) VALUES (?,?)";
+	$statement = $conn->prepare($sql);
+	$statement->bind_param('is', $student_id, $hashed_password);
+	$statement->execute();
+
+	// Update users_permissions
+	$account_type = 1;
+	$sql = "INSERT INTO users_permissions (student_id, account_type) VALUES (?,?)";
+	$statement = $conn->prepare($sql);
+	$statement->bind_param('ii', $student_id, $account_type);
+	$statement->execute();
+
+	// Set student id
+	$_SESSION['student_id'] = $student_id;
+
+	// Redirect user to profile once registration complete
 	header("Location: ../profile.php");
 } catch (mysqli_sql_exception $e) {
 	$error = $e->getMessage();

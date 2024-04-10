@@ -19,26 +19,39 @@
       <nav>
          <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="profile.php">Profile</a></li>
+            <!-- <li><a href="profile.php">Profile</a></li> -->
             <li class="active"><a href="register.php">Register</a></li>
-            <li><a href="">Log out</a></li>
+            <li><a href="login.php">Log In</a></li>
          </ul>
       </nav>
       <!-- Main section -->
       <main>
          <div class="main-container">
             <h2>Register a new profile</h2>
-            <form action="phpScripts/process_register.php" method="POST">
+            <form action="phpScripts/process_register.php" method="POST" onsubmit="return validateForm()">
                <!-- 1d. Changes to register -->
                <fieldset>
                   <legend><span>Password Information</span></legend>
                   <table>
                      <tr>
-                        <td><label for="first_name">Password:</label></td>
-                        <td><input type="password" id="password" name="password"></td>
+                        <td><label for="password">Password:</label></td>
+                        <td><input type="password" id="password" name="password" required></td>
 
-                        <td><label for="last_name">Confirm Password:</label></td>
-                        <td><input type="password" id="password" name="password"></td>
+                        <td><label for="confirm_password">Confirm Password:</label></td>
+                        <td><input type="password" id="confirm_password" name="confirm_password" required></td>
+
+                        <script>
+                           function validateForm() {
+                              var password = document.getElementById("password").value;
+                              var confirmPassword = document.getElementById("confirm_password").value;
+
+                              if (password != confirmPassword) {
+                                 alert("Passwords must match");
+                                 return false;
+                              }
+                              return true;
+                           }
+                        </script>
                      </tr>
                   </table>
                </fieldset>
@@ -48,13 +61,13 @@
                   <table>
                      <tr>
                         <td><label for="first_name">First Name:</label></td>
-                        <td><input type="text" id="first_name" name="first_name"></td>
+                        <td><input type="text" id="first_name" name="first_name" required></td>
 
                         <td><label for="last_name">Last Name:</label></td>
-                        <td><input type="text" id="last_name" name="last_name"></td>
+                        <td><input type="text" id="last_name" name="last_name" required></td>
 
                         <td><label for="DOB">DOB:</label></td>
-                        <td><input type="date" id="DOB" name="DOB"></td>
+                        <td><input type="date" id="DOB" name="DOB" required></td>
                      </tr>
                   </table>
                </fieldset>
@@ -64,13 +77,13 @@
                   <table>
                      <tr>
                         <td><label for="student_email">Email Address:</label></td>
-                        <td><input type="text" id="student_email" name="student_email"></td>
+                        <td><input type="text" id="student_email" name="student_email" required></td>
                      </tr>
 
                      <tr>
                         <td><label for="program">Program</label></td>
                         <td>
-                           <select name="program" id="program">
+                           <select name="program" id="program" required>
                               <option value="placeholder">Choose Program</option>
                               <option value="Computer Systems Engineering">Computer Systems Engineering</option>
                               <option value="Software Engineering">Software Engineering</option>

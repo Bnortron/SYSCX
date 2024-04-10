@@ -18,13 +18,11 @@ h3,
 nav,
 footer,
 div {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 body {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   background-color: #ffffff;
 }
 
@@ -53,13 +51,6 @@ header p {
 /* main article styling */
 main {
   background-color: white;
-}
-
-section {
-  margin-left: 16%;
-  padding-top: 10px;
-  width: 68%;
-  float: left;
 }
 
 /* Form style */
@@ -219,17 +210,14 @@ summary {
   padding: 1rem;
 }
 
-/* Form Styling */
-tr {
+/* Table styling */
+.main-container tr {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-td {
-  padding-block: 0.25rem;
-}
-
+/* Form Styling */
 .new_post {
   padding-inline: 1rem;
 }
@@ -248,7 +236,55 @@ input[type=reset] {
   padding-inline: 0.25rem;
 }
 
-.post-time {
-  color: var(--clr-accent);
-  font-size: 0.5em;
+/* Login styling */
+.login-section {
+  width: max-content;
+  margin: 0 auto;
+  margin-top: 1em;
+}
+
+.login-fieldset table {
+  width: 100%;
+  padding-inline: 1rem;
+}
+
+.login-fieldset td {
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* User List styling */
+.wrapper {
+  width: min(900px, 100% - 3rem);
+  margin-inline: auto;
+  margin-top: 1em;
+}
+
+.wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #e9e9e9;
+}
+
+.wrapper caption,
+.wrapper th,
+.wrapper td {
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wrapper caption {
+  background: #1f1f1f;
+  color: #f0f0f0;
+}
+
+.wrapper th {
+  background: hsl(0 0% 0% / 0.6);
+  color: #f0f0f0;
+}
+
+.wrapper tr:nth-of-type(2n) {
+  background: hsl(0 0% 0% / 0.1);
 }
