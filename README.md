@@ -39,6 +39,6 @@ This project involves updating and adding new features to an existing web applic
   - [x] Redirect the user to login.php after logout.
 - [x] Create users_permissions table:
   - [x] Create a table with columns student_id (primary key) and account_type.
-- [ ] Create user_list.php page:
-  - [ ] Display a list of users and their information.
-  - [ ] Accessible only by users with admin permissions.
+- [x] Create user_list.php page:
+  - [x] Display a list of users and their information.
+  - [x] Accessible only by users with admin permissions.
