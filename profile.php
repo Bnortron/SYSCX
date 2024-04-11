@@ -19,6 +19,7 @@ if (isset($_SESSION['student_id'])) {
       $users_program = getUserProgram($conn, $student_id);
       $users_avatar = getUserAvatar($conn, $student_id);
       $users_address = getUserAddress($conn, $student_id);
+      $user_permissions = getUserPermissions($conn, $student_id);
 
       // If user has registered and tables user_info, user_program, users_avatar, users_address are not NULL
       // Prevents fatal error from extract() on empty array(s)
@@ -28,6 +29,7 @@ if (isset($_SESSION['student_id'])) {
          extract($users_program);
          extract($users_avatar);
          extract($users_address);
+         extract($user_permissions);
       }
    } catch (mysqli_sql_exception $e) {
       $error = $e->getMessage();
@@ -61,7 +63,10 @@ if (isset($_SESSION['student_id'])) {
             <li><a href="index.php">Home</a></li>
             <li class="active"><a href="profile.php">Profile</a></li>
             <!-- <li><a href="register.php">Register</a></li> -->
-            <li><a href="logout.php">Log out</a></li>
+            <li><a href="logout.php">Log Out</a></li>
+            <?php if ($account_type == 0): ?>
+               <li><a href="user_list.php">User List</a></li>
+            <?php endif; ?>
          </ul>
       </nav>
 
