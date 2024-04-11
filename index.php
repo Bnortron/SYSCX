@@ -18,6 +18,7 @@ if (isset($_SESSION['student_id'])) {
       $user_info = getUserInfo($conn, $student_id);
       $user_program = getUserProgram($conn, $student_id);
       $user_avatar = getUserAvatar($conn, $student_id);
+      $user_permissions = getUserPermissions($conn, $student_id);
 
       // If user has registered:
       if ($user_info && $user_program && $user_avatar) {
@@ -25,6 +26,7 @@ if (isset($_SESSION['student_id'])) {
          extract($user_info);
          extract($user_program);
          extract($user_avatar);
+         extract($user_permissions);
       } else {
          $first_name = '';
          $last_name = '';
@@ -83,7 +85,10 @@ if (isset($_SESSION['student_id'])) {
             <li class="active"><a href="index.php">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
             <!-- <li><a href="register.php">Register</a></li> -->
-            <li><a href="logout.php">Log out</a></li>
+            <li><a href="logout.php">Log Out</a></li>
+            <?php if ($account_type == 0): ?>
+               <li><a href="user_list.php">User List</a></li>
+            <?php endif; ?>
          </ul>
       </nav>
 

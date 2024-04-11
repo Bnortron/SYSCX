@@ -5,7 +5,7 @@ USE braden_norton_syscx;
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 09:00 PM
+-- Generation Time: Apr 10, 2024 at 10:52 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -66,6 +66,28 @@ CREATE TABLE `users_info` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users_passwords`
+--
+
+CREATE TABLE `users_passwords` (
+  `student_id` int(10) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_permissions`
+--
+
+CREATE TABLE `users_permissions` (
+  `student_id` int(10) NOT NULL,
+  `account_type` int(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users_posts`
 --
 
@@ -110,6 +132,18 @@ ALTER TABLE `users_info`
   ADD PRIMARY KEY (`student_id`);
 
 --
+-- Indexes for table `users_passwords`
+--
+ALTER TABLE `users_passwords`
+  ADD PRIMARY KEY (`student_id`);
+
+--
+-- Indexes for table `users_permissions`
+--
+ALTER TABLE `users_permissions`
+  ADD PRIMARY KEY (`student_id`);
+
+--
 -- Indexes for table `users_posts`
 --
 ALTER TABLE `users_posts`
@@ -130,7 +164,7 @@ ALTER TABLE `users_program`
 -- AUTO_INCREMENT for table `users_info`
 --
 ALTER TABLE `users_info`
-  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users_posts`
@@ -146,25 +180,25 @@ ALTER TABLE `users_posts`
 -- Constraints for table `users_address`
 --
 ALTER TABLE `users_address`
-  ADD CONSTRAINT `users_address_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`);
+  ADD CONSTRAINT `users_address_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users_avatar`
 --
 ALTER TABLE `users_avatar`
-  ADD CONSTRAINT `users_avatar_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`);
+  ADD CONSTRAINT `users_avatar_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `users_posts`
 --
 ALTER TABLE `users_posts`
-  ADD CONSTRAINT `users_posts_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`);
+  ADD CONSTRAINT `users_posts_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `users_program`
 --
 ALTER TABLE `users_program`
-  ADD CONSTRAINT `users_program_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`);
+  ADD CONSTRAINT `users_program_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users_info` (`student_id`)  ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
